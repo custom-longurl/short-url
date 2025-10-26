@@ -3,93 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Initiating Link Resolution...</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <style>
-        /* --- Professional Space Theme Redirector --- */
-        
-        :root {
-            --bg-color: #0c0f1a;
-            --accent-color: #00bcd4;
-            --error-color: #F44336;
-            --text-color: #e0f7fa;
-            --glow-color: rgba(0, 188, 212, 0.6);
-            --font-main: 'Poppins', sans-serif;
-            --font-display: 'Orbitron', sans-serif;
-        }
-
-        body {
-            font-family: var(--font-main);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            flex-direction: column;
-            text-align: center;
-            /* Simple background for this file */
-            background: radial-gradient(circle at center, #1b3044 0%, #0c0f1a 100%);
-        }
-
-        .redirect-container {
-            max-width: 500px;
-            padding: 40px;
-            background: rgba(19, 34, 51, 0.9);
-            border-radius: 12px;
-            border: 1px solid var(--accent-color);
-            box-shadow: 0 0 30px rgba(0, 188, 212, 0.4);
-        }
-
-        #message {
-            font-family: var(--font-display);
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            text-shadow: 0 0 8px var(--glow-color);
-        }
-
-        #submessage {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 20px;
-            min-height: 25px;
-        }
-        
-        /* Error Specific Styling */
-        .error-state #message {
-            color: var(--error-color);
-            text-shadow: 0 0 8px rgba(244, 67, 54, 0.6);
-        }
-
-        /* Home Button Styling */
-        .home-button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 15px;
-            background-color: var(--accent-color);
-            color: #000;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 600;
-            transition: background-color 0.2s;
-        }
-        .home-button:hover {
-            background-color: #34e1f7;
-        }
-    </style>
+     <link rel="icon" href="myurllogo.png" type="image/png"> 
+    <title>Redirecting</title>
 </head>
 <body>
-    <div class="redirect-container">
-        <h1 id="message">Looking Up Link...</h1>
-        <p id="submessage">Initializing secure link resolver...</p>
-        <div id="action-area"></div>
-    </div>
+    <h1 id="message">Looking up short link...</h1>
+    <p id="submessage">Please wait a moment.</p>
+    <div id="action-area"></div>
     
     <script>
         (async function() {
@@ -97,12 +17,12 @@
             const rawPath = window.location.pathname.substring(1).split('?')[0]; 
             const messageEl = document.getElementById("message");
             const subMessageEl = document.getElementById("submessage");
-            const containerEl = document.querySelector(".redirect-container");
+            const actionAreaEl = document.getElementById("action-area"); // Need this element for the button
 
-            // Define known static file paths that should redirect to the main app page (index.html)
+            // Define the application file paths
             const appFiles = [
-                'index.html', // Main application page
-                '404.html'    // This file itself, if accessed directly
+                'index.html', // The main application page
+                '404.html'    // This file itself
             ];
 
             // 1. Check if the path points to a known internal file
@@ -114,7 +34,7 @@
 
             // 2. Proceed with dynamic lookup (for short links)
             try {
-                // Fetch links.json, bypassing cache
+                // Fetch links.json, bypassing cache for freshness
                 const linksJsonUrl = `/links.json?t=${Date.now()}`;
                 
                 messageEl.textContent = "Resolving Short Link...";
@@ -133,13 +53,13 @@
                 const longUrl = linksData[decodedPath];
 
                 if (longUrl && typeof longUrl === 'string' && longUrl.startsWith('http')) {
-                    messageEl.textContent = "Warp Jump Successful!";
-                    subMessageEl.textContent = `Redirecting to destination...`;
+                    messageEl.textContent = "Redirecting Successful!";
+                    subMessageEl.textContent = `Destination found. Redirecting...`;
 
                     // Perform redirect immediately after brief success message
                     setTimeout(() => {
                         window.location.replace(longUrl);
-                    }, 500); // 0.5 second pause
+                    }, 500);
 
                 } else {
                     // Link not found or invalid data
@@ -148,13 +68,12 @@
 
             } catch (error) {
                 console.error("Redirect failed:", error);
-                containerEl.classList.add("error-state");
+                
                 messageEl.textContent = `Error: Link Not Found`;
                 subMessageEl.textContent = error.message;
                 
-                // Add button to return to the creator app
-                const actionArea = document.getElementById("action-area");
-                actionArea.innerHTML = `<a href="/index.html" class="home-button">Return to Link Creator</a>`;
+                // Add button to return to the creator app (using minimal inline styling for visibility)
+                actionAreaEl.innerHTML = `<a href="index.html" style="display: inline-block; margin-top: 15px; padding: 10px 15px; background-color: #3e8e41; color: white; text-decoration: none; border-radius: 5px;">Return to Link Creator</a>`;
             }
         })();
     </script>
