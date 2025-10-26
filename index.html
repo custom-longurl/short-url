@@ -620,6 +620,83 @@
             .contact { max-width: 800px; }
         }
     </style>
+   <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      // UPDATED: Use fully qualified ID for the definition
+      "@id": "https://urlz.site/#WebSite", 
+      "url": "https://urlz.site/",
+      "name": "Custom Link - The Ultimate Custom URL",
+      "description": "Generate quick, memorable, custom short links for the urlz.site domain.",
+      "publisher": {
+        // UPDATED: Use fully qualified ID for the reference
+        "@id": "https://urlz.site/#Organization" 
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://urlz.site/{search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      },
+      "hasPart": {
+        "@type": "SiteNavigationElement",
+        "name": "Navigation Menu",
+        "about": "Key sections of the application.",
+        "url": [
+          "https://urlz.site/#home",
+          "https://urlz.site/#shortener",
+          "https://urlz.site/#history",
+          "https://urlz.site/#contact"
+        ]
+      }
+    },
+    {
+      "@type": "WebPage",
+      "url": "https://urlz.site/",
+      "name": "Custom Link Home Page",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        // UPDATED: Use fully qualified ID for the reference
+        "@id": "https://urlz.site/#WebSite" 
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://urlz.site/#home"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Organization",
+      // UPDATED: Use fully qualified ID for the definition
+      "@id": "https://urlz.site/#Organization", 
+      "name": "Manikandan N's Custom Link Service",
+      "url": "https://urlz.site/",
+      "logo": "myurllogo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "manilunar07@gmail.com"
+      }
+    },
+    {
+      "@type": "Person",
+      "name": "Manikandan N",
+      "url": "https://urlz.site/#contact"
+    }
+  ]
+}
+</script>
 </head>
 <body>
     
@@ -1377,6 +1454,4 @@
         });
     </script>
 </body>
-
 </html>
-
