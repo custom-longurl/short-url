@@ -63,7 +63,7 @@
                 // Use cache-busting to ensure we always get the freshest links.json
                 const linksJsonUrl = `/links.json?t=${Date.now()}`;
                 
-                messageEl.textContent = "Resolving Short Link...";
+                messageEl.textContent = "Looking up short link...";
                 subMessageEl.textContent = `Searching for: /${rawPath}`;
 
                 // Fetch link data without waiting for the animation/text updates
@@ -102,3 +102,4 @@
     </script>
 </body>
 </html>
+
